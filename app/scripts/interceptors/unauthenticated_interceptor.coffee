@@ -1,4 +1,4 @@
-@angularCoffeeApp.factory 'unauthenticatedInterceptor', () ->
+@flipGiveApp.factory 'unauthenticatedInterceptor', () ->
   
   responseError: (response) ->
     if response.status is 401

@@ -1,6 +1,8 @@
 // Generated on 2015-02-27 using generator-angular 0.11.1
 'use strict';
 
+var env = process.env.ENV || 'development';
+
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/**/*.js'
@@ -24,6 +26,17 @@ module.exports = function (grunt) {
   // Define the configuration for all the tasks
   grunt.initConfig({
 
+    replace: {
+      config: {
+        src: '.tmp/scripts/app.js',
+        overwrite: true,
+        replacements: [{
+          from: /{env}/,
+          to: env
+        }]
+      }
+    },
+
     // Project settings
     yeoman: appConfig,
 
@@ -40,11 +53,7 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/scripts/modules/**/*.{coffee,litcoffee,coffee.md}'
         ],
         tasks: ['newer:coffee:dist']
-      },
-      coffeeTest: {
-        files: ['test/spec/**/*.{coffee,litcoffee,coffee.md}'],
-        tasks: ['newer:coffee:test', 'karma']
-      },
+      },            
       compass: {
         files: ['<%= yeoman.app %>/styles/**/*.{scss,sass}'],
         tasks: ['compass:server', 'autoprefixer']
@@ -137,7 +146,10 @@ module.exports = function (grunt) {
         options: {
           jshintrc: 'test/.jshintrc'
         },
-        src: ['test/spec/**/*.js']
+        src: ['test/e2e/**/*.js',
+              'test/unit/**/*.js',
+              'test/mock/**/*.js'
+        ]
       }
     },
 
@@ -195,14 +207,14 @@ module.exports = function (grunt) {
         fileTypes:{
           js: {
             block: /(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi,
-              detect: {
-                js: /'(.*\.js)'/gi
-              },
-              replace: {
-                js: '\'{{filePath}}\','
-              }
+            detect: {
+              js: /'(.*\.js)'/gi
+            },
+            replace: {
+              js: '\'{{filePath}}\','
             }
           }
+        }
       },
       sass: {
         src: ['<%= yeoman.app %>/styles/**/*.{scss,sass}'],
@@ -234,9 +246,9 @@ module.exports = function (grunt) {
       test: {
         files: [{
           expand: true,
-          cwd: 'test/spec',
+          cwd: 'test/coffee',
           src: '**/*.coffee',
-          dest: '.tmp/spec',
+          dest: 'test',
           ext: '.js'
         }]
       }
@@ -314,33 +326,7 @@ module.exports = function (grunt) {
           '<%= yeoman.dist %>/styles'
         ]
       }
-    },
-
-    // The following *-min tasks will produce minified files in the dist folder
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '.tmp/styles/**/*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
+    },    
 
     imagemin: {
       dist: {
@@ -451,11 +437,41 @@ module.exports = function (grunt) {
       ]
     },
 
-    // Test settings
+    // Testing: Unit tests with Karma
     karma: {
       unit: {
         configFile: 'test/karma.conf.js',
         singleRun: true
+      }
+    },
+   
+    // Testing: End-To-End tests with Protractor
+    protractor: {
+      options: {
+        configFile: 'test/protractor.conf.js',
+        noColor: false,
+     
+        // Set to true if you would like to use the Protractor command line debugging tool
+        // debug: true,
+     
+        // Additional arguments that are passed to the webdriver command
+        args: { }
+      },
+      e2e: {
+        options: {
+          // Stops Grunt process if a test fails
+          keepAlive: false
+        }
+      }
+    },
+
+    // Testing: Starting up Selenium server for Protractor tests
+    protractor_webdriver: {
+      start: {
+        options: {
+          path: 'node_modules/protractor/bin/',
+          command: 'webdriver-manager start'
+        }
       }
     }
   });
@@ -470,6 +486,7 @@ module.exports = function (grunt) {
       'clean:server',
       'wiredep',
       'concurrent:server',
+      'replace:config',
       'autoprefixer:server',
       'connect:livereload',
       'watch'
@@ -485,14 +502,17 @@ module.exports = function (grunt) {
     'clean:server',
     'wiredep',
     'concurrent:test',
+    'replace:config',
     'autoprefixer',
     'connect:test',
-    'karma'
-  ]);
+    'protractor_webdriver:start',
+    'protractor:e2e'
+  ]);  
 
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
+    'replace:config',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',

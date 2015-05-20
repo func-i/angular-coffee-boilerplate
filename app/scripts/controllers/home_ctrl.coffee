@@ -1,8 +1,8 @@
 'use strict'
 
-@controllerModule.controller 'HomeCtrl', () ->
+@controllerModule.controller 'HomeCtrl', (Product) ->
 
-  @company = 
-    name: "Test Company"
+  Product.query().$promise.then (products) =>
+    @products = products.data
 
   return @
