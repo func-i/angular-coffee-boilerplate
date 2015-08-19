@@ -5,9 +5,16 @@ version 0.11.1.
 
 ## Build & development
 
+`npm install -g bower`
+`npm install`
+`bower install`
+
 Run `grunt` for building and `grunt serve` for preview.
 
 ## Testing
+
+# Update your chrome webdriver
+`node_modules/protractor/bin/webdriver-manager update --standalone --chrome`
 
 Running `grunt test` will run the unit tests with karma.
 

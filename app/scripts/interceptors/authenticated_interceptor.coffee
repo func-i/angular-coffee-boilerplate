@@ -1,4 +1,4 @@
-@flipGiveApp.factory 'authenticatedInterceptor', () ->
+@angularCoffeeApp.factory 'authenticatedInterceptor', () ->
   
   request: (config) ->    
     # if the user is logged in, set it here

@@ -10,9 +10,9 @@ angular.module('CONFIG.development', []).constant 'CONFIG',
 angular.module('CONFIG.staging', []).constant 'CONFIG',
   
   api:
-    host: "https://staging.flipgive.com"
+    host: "https://staging.angularcoffeeapp.com"
   
 angular.module('CONFIG.production', []).constant 'CONFIG',
   
   api:
-    host: "https://api.flipgive.com"
+    host: "https://api.angularcoffeeapp.com"

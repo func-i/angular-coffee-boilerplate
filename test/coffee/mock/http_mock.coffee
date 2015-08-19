@@ -2,9 +2,9 @@ module.exports.httpMock = ->
   
   mockUser  = arguments[0] or {}
 
-  flipGiveApp = angular.module 'flipGiveApp'
+  angularCoffeeApp = angular.module 'angularCoffeeApp'
 
-  flipGiveApp.run ($httpBackend, sessionsPath) ->
+  angularCoffeeApp.run ($httpBackend, sessionsPath) ->
   
     createSession = () ->
       user        : mockUser

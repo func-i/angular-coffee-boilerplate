@@ -1,9 +1,9 @@
 (function() {
   module.exports.httpMock = function() {
-    var flipGiveApp, mockUser;
+    var angularCoffeeApp, mockUser;
     mockUser = arguments[0] || {};
-    flipGiveApp = angular.module('flipGiveApp');
-    return flipGiveApp.run(function($httpBackend, sessionsPath) {
+    angularCoffeeApp = angular.module('angularCoffeeApp');
+    return angularCoffeeApp.run(function($httpBackend, sessionsPath) {
       var createSession;
       createSession = function() {
         return {

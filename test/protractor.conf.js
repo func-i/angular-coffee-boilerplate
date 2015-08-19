@@ -37,13 +37,13 @@ exports.config = {
     // global.By = global.by;
 
     // add ngMockE2E module for http mock below
-    browser.addMockModule('flipGiveApp.testMockE2E', function () {
-      testModule = angular.module('flipGiveApp.testMockE2E', ['ngMockE2E']);
+    browser.addMockModule('angularCoffeeApp.testMockE2E', function () {
+      testModule = angular.module('angularCoffeeApp.testMockE2E', ['ngMockE2E']);
     });
 
     // http mock
     httpMockModule = require("./mock/http_mock.js");   
-    browser.addMockModule('flipGiveApp', httpMockModule.httpMock);    
+    browser.addMockModule('angularCoffeeApp', httpMockModule.httpMock);    
 
     global.login = function() {
       browser.get(BASE_URL + '#/login');       

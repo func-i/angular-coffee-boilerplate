@@ -1,6 +1,6 @@
 "use strict"
 
-@flipGiveApp = angular.module "flipGiveApp", [
+@angularCoffeeApp = angular.module "angularCoffeeApp", [
   'ngAnimate',
   'ngCookies',
   'ngResource',
@@ -9,24 +9,24 @@
   'ngTouch',
   'ui.router',
 
-  'flipGiveApp.controllers',
-  'flipGiveApp.directives',
-  'flipGiveApp.filters',
-  'flipGiveApp.resources',
-  'flipGiveApp.services',
-  'flipGiveApp.interceptors',
+  'angularCoffeeApp.controllers',
+  'angularCoffeeApp.directives',
+  'angularCoffeeApp.filters',
+  'angularCoffeeApp.resources',
+  'angularCoffeeApp.services',
+  'angularCoffeeApp.interceptors',
 
   'CONFIG.{env}',  
 ]
 
-@controllerModule  = angular.module 'flipGiveApp.controllers', []
-@directiveModule   = angular.module 'flipGiveApp.directives', []
-@filterModule      = angular.module 'flipGiveApp.filters', []
-@resourceModule    = angular.module 'flipGiveApp.resources', []
-@serviceModule     = angular.module 'flipGiveApp.services', []
-@configModule      = angular.module 'flipGiveApp.config', []
-@interceptorModule = angular.module 'flipGiveApp.interceptors', []
+@controllerModule  = angular.module 'angularCoffeeApp.controllers', []
+@directiveModule   = angular.module 'angularCoffeeApp.directives', []
+@filterModule      = angular.module 'angularCoffeeApp.filters', []
+@resourceModule    = angular.module 'angularCoffeeApp.resources', []
+@serviceModule     = angular.module 'angularCoffeeApp.services', []
+@configModule      = angular.module 'angularCoffeeApp.config', []
+@interceptorModule = angular.module 'angularCoffeeApp.interceptors', []
 
-@flipGiveApp.run ($rootScope, $state) ->
+@angularCoffeeApp.run ($rootScope, $state) ->
   # Do other stuff here as needed
   console.log "App started"

@@ -1,6 +1,6 @@
 'use strict'
 
-@flipGiveApp.config ($urlRouterProvider, $stateProvider, $compileProvider, $httpProvider) ->
+@angularCoffeeApp.config ($urlRouterProvider, $stateProvider, $compileProvider, $httpProvider) ->
   
   $httpProvider.interceptors.push 'authenticatedInterceptor', 'unauthenticatedInterceptor'
 
